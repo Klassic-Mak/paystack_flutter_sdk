@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:paystack_flutter/model/paystack_request_response.dart';
 
 class MobileMoneyService {
-  static Future<PaystackRequestResponse> charge({
+  static Future<ChargeResponse> charge({
     required String secretKey,
     required String email,
     required int amount,
@@ -32,6 +32,6 @@ class MobileMoneyService {
       }),
     );
 
-    return PaystackRequestResponse.fromJson(jsonDecode(response.body));
+    return ChargeResponse.fromJson(jsonDecode(response.body));
   }
 }
