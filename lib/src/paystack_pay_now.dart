@@ -172,7 +172,7 @@ class _PaystackPayNowState extends State<PaystackPayNow> {
                         case 'https://cancelurl.com':
                         case 'https://standard.paystack.co/close':
                         case 'https://paystack.co/close':
-                        case 'https://github.com/Klassic-Maku/paystack_flutter':
+                        case 'https://github.com/Klassic-Mak/paystack_flutter':
                           await _checkTransactionStatus(
                                   snapshot.data!.reference)
                               .then((value) {
