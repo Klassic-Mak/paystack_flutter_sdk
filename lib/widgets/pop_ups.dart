@@ -8,7 +8,6 @@ class CustomSnackbar {
       message,
       backgroundColor: Colors.white,
       textColor: Colors.black,
-      animationPath: 'assets/success.json',
     );
   }
 
@@ -18,7 +17,6 @@ class CustomSnackbar {
       message,
       backgroundColor: const Color.fromARGB(255, 223, 0, 0),
       textColor: Colors.white,
-      animationPath: 'assets/error.json',
     );
   }
 
@@ -27,7 +25,6 @@ class CustomSnackbar {
     String message, {
     required Color backgroundColor,
     required Color textColor,
-    required String animationPath,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -45,10 +42,6 @@ class CustomSnackbar {
             child: Row(
               children: [
                 const SizedBox(width: 5),
-                SizedBox(
-                  height: 42,
-                  child: Lottie.asset(animationPath),
-                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

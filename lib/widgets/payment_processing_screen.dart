@@ -58,12 +58,16 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
         child: Column(
           children: [
             const Spacer(flex: 3),
-            SizedBox(
-              height: 80,
-              child: Lottie.asset("assets/loading_blue.json"),
+            CircularProgressIndicator(
+              color: Colors.black,
+              strokeWidth: 2,
             ),
             const SizedBox(height: 16),
-            const Text("Processing Payment..."),
+            const Text("Processing Payment...",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                )),
             const Spacer(flex: 2),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
