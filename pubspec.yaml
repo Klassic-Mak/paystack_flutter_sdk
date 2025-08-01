@@ -25,7 +25,5 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/paystack_logo.svg
-    - assets/success.json
-    - assets/error.json
+    - assets/
   uses-material-design: true
