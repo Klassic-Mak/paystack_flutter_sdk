@@ -44,6 +44,7 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
       backgroundColor:
           Theme.of(context).scaffoldBackgroundColor ?? Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -55,25 +56,28 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(flex: 3),
-            SizedBox(
-              height: 80,
-              child: Lottie.asset(
-                  "packages/paystack_flutter/assets/loading_blue.json"),
-            ),
-            const SizedBox(height: 16),
-            const Text("Processing Payment..."),
-            const Spacer(flex: 2),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: SvgPicture.asset(
-                'packages/paystack_flutter/assets/paystack_logo.svg',
-                width: 100,
+        child: Center(
+          child: Column(
+            children: [
+              const Spacer(flex: 3),
+              SizedBox(
+                height: 100,
+                child: Lottie.asset(
+                    height: 100,
+                    "packages/paystack_flutter/assets/loading_blue.json"),
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              const Text("Processing Payment"),
+              const Spacer(flex: 2),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: SvgPicture.asset(
+                  'packages/paystack_flutter/assets/paystack_logo.svg',
+                  width: 120,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

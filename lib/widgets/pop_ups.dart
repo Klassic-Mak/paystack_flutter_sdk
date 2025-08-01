@@ -8,7 +8,7 @@ class CustomSnackbar {
       message,
       backgroundColor: Colors.white,
       textColor: Colors.black,
-      animationPath: 'packages/paystack_flutter/assets/animations/success.json',
+      animationPath: 'packages/paystack_flutter/assets/success.json',
     );
   }
 
@@ -18,7 +18,7 @@ class CustomSnackbar {
       message,
       backgroundColor: const Color.fromARGB(255, 223, 0, 0),
       textColor: Colors.white,
-      animationPath: 'packages/paystack_flutter/assets/animations/error.json',
+      animationPath: 'packages/paystack_flutter/assets/error.json',
     );
   }
 
