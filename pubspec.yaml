@@ -26,6 +26,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/paystack_logo.svg
-    - assets/animations/success.json
-    - assets/animations/error.json
+    - assets/success.json
+    - assets/error.json
   uses-material-design: true
