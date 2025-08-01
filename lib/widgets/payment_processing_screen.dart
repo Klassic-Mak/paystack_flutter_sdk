@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:paystack_flutter/model/payment_data.dart';
 
 class PaymentProcessingScreen extends StatefulWidget {
@@ -57,7 +58,10 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
         child: Column(
           children: [
             const Spacer(flex: 3),
-            const CircularProgressIndicator(),
+            SizedBox(
+              height: 80,
+              child: Lottie.asset("assets/loading_blue.json"),
+            ),
             const SizedBox(height: 16),
             const Text("Processing Payment..."),
             const Spacer(flex: 2),
