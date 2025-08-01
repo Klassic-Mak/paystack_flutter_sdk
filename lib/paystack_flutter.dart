@@ -14,7 +14,7 @@ import '../model/paystack_request_response.dart';
 
 class PaystackFlutter {
   // === USSD Payments ===
-  static Future<ChargeResponse> ussd({
+  static Future<void> ussd({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -50,11 +50,10 @@ class PaystackFlutter {
         ),
       ),
     );
-    throw UnimplementedError('This method must return a ChargeResponse.');
   }
 
   // === Mobile Money ===
-  static Future<ChargeResponse> mobileMoney({
+  static Future<void> mobileMoney({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -92,11 +91,10 @@ class PaystackFlutter {
         ),
       ),
     );
-    throw UnimplementedError('This method must return a ChargeResponse.');
   }
 
   // === Bank Debit ===
-  static Future<ChargeResponse> bank({
+  static Future<void> bank({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -131,11 +129,10 @@ class PaystackFlutter {
         ),
       ),
     );
-    throw UnimplementedError('This method must return a ChargeResponse.');
   }
 
   // === QR Code ===
-  static Future<ChargeResponse> qrCode({
+  static Future<void> qr({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -171,11 +168,10 @@ class PaystackFlutter {
         ),
       ),
     );
-    throw UnimplementedError('This method must return a ChargeResponse.');
   }
 
   // === Direct Debit ===
-  static Future<ChargeResponse> directDebitBank({
+  static Future<void> directDebitBank({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -215,6 +211,5 @@ class PaystackFlutter {
         ),
       ),
     );
-    throw UnimplementedError('This method must return a ChargeResponse.');
   }
 }
