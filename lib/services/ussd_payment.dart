@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:paystack_flutter/model/paystack_request_response.dart';
+import 'package:paystack_flutter/widgets/pop_ups.dart'; // 🔔 Ensure this has CustomSnackbar
 
-//For Nigerians
+// For Nigerians
 enum USSDProvider {
   gtBank, // 737
   uba, // 919
@@ -12,6 +16,7 @@ enum USSDProvider {
 
 class USSDPaymentService {
   static Future<ChargeResponse> initialize({
+    required BuildContext context,
     required String secretKey,
     required String email,
     required int amount,
@@ -19,25 +24,53 @@ class USSDPaymentService {
     required USSDProvider provider,
     Map<String, dynamic>? metadata,
   }) async {
-    // Select USSD code based on bank/provider
-    String ussdType = _getUSSDCode(provider);
+    final String ussdType = _getUSSDCode(provider);
 
-    final response = await http.post(
-      Uri.parse('https://api.paystack.co/charge'),
-      headers: {
-        'Authorization': 'Bearer $secretKey',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'email': email,
-        'amount': amount,
-        'currency': currency,
-        'ussd': {'type': ussdType},
-        'metadata': metadata ?? {},
-      }),
-    );
+    try {
+      final response = await http
+          .post(
+            Uri.parse('https://api.paystack.co/charge'),
+            headers: {
+              'Authorization': 'Bearer $secretKey',
+              'Content-Type': 'application/json',
+            },
+            body: jsonEncode({
+              'email': email,
+              'amount': amount,
+              'currency': currency,
+              'ussd': {'type': ussdType},
+              'metadata': metadata ?? {},
+            }),
+          )
+          .timeout(const Duration(seconds: 15)); // ⏱ Timeout
 
-    return ChargeResponse.fromJson(jsonDecode(response.body));
+      final responseData = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        CustomSnackbar.showSuccess(
+            context, "USSD Payment initiated successfully.");
+        return ChargeResponse.fromJson(responseData);
+      } else {
+        final errorMessage =
+            responseData['message'] ?? 'An unknown error occurred';
+        CustomSnackbar.showError(context, "USSD Payment failed: $errorMessage");
+        throw Exception("USSD Payment failed: $errorMessage");
+      }
+    } on SocketException {
+      CustomSnackbar.showError(
+          context, "No internet connection. Please check your network.");
+      throw Exception("No internet connection.");
+    } on TimeoutException {
+      CustomSnackbar.showError(context, "Request timed out. Please try again.");
+      throw Exception("Request timed out.");
+    } on FormatException {
+      CustomSnackbar.showError(
+          context, "Invalid response format from Paystack.");
+      throw Exception("Invalid response format.");
+    } catch (e) {
+      CustomSnackbar.showError(context, "Unexpected error: ${e.toString()}");
+      throw Exception("Unexpected error: ${e.toString()}");
+    }
   }
 
   static String _getUSSDCode(USSDProvider provider) {
