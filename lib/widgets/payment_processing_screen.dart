@@ -72,7 +72,7 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
               const Text("Processing Paymento"),
               const Spacer(flex: 2),
               Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: SvgPicture.asset(
                   color: Color.fromRGBO(9, 167, 219, 1),
                   'packages/paystack_flutter/assets/paystack_logo.svg',
