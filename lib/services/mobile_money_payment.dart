@@ -39,14 +39,14 @@ class MobileMoneyService {
           .timeout(const Duration(seconds: 15)); // ⏱ Timeout
 
       final responseData = jsonDecode(response.body);
-
+      print(responseData);
       if (response.statusCode == 200 || response.statusCode == 201) {
         CustomSnackbar.showSuccess(
             context, "Mobile Money charge initiated successfully.");
         return ChargeResponse.fromJson(responseData);
       } else {
         final errorMessage =
-            responseData['message'] ?? 'Unknown error occurred';
+            responseData['message']?.toString() ?? 'Unknown error occurred';
         CustomSnackbar.showError(
             context, "Mobile Money charge failed: $errorMessage");
         throw Exception("Mobile Money charge failed: $errorMessage");
