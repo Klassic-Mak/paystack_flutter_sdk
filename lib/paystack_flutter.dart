@@ -213,3 +213,5 @@ class PaystackFlutter {
     );
   }
 }
+
+//Version 1.0.0
