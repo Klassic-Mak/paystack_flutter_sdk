@@ -58,6 +58,8 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
       body: SafeArea(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(flex: 3),
               SizedBox(
@@ -67,11 +69,12 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
                     "packages/paystack_flutter/assets/loading_blue.json"),
               ),
               const SizedBox(height: 16),
-              const Text("Processing Payment"),
+              const Text("Processing Paymento"),
               const Spacer(flex: 2),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: SvgPicture.asset(
+                  color: Color.fromRGBO(9, 167, 219, 1),
                   'packages/paystack_flutter/assets/paystack_logo.svg',
                   width: 120,
                 ),
