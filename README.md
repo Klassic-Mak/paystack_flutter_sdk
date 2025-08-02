@@ -90,7 +90,7 @@ await MobileMoneyService.charge(
 | `secretKey` | `String` | **Required**. Your Paystack secret key |
 | `email`     | `String` | **Required**. Customer email address |
 | `amount`    | `int`    | **Required**. Amount in pesewa       |
-| `currency`  | `String` | **Required**. `'GHS'` only           |
+| `currency`  | `String` | **Required**. `'GHS'`            |
 | `phone`     | `String` | **Required**. Mobile number          |
 | `provider`  | `String` | **Required**. `mtn`, `vodafone`, etc |
 
@@ -115,7 +115,7 @@ await USSDPaymentService.initialize(
 | `secretKey` | `String`               | **Required**. Your Paystack secret key                          |
 | `email`     | `String`               | **Required**. Customer email                                    |
 | `amount`    | `int`                  | **Required**. Amount in kobo                                    |
-| `currency`  | `String`               | **Required**. `'NGN'` only                                      |
+| `currency`  | `String`               | **Required**. `'GHS'`                                       |
 | `provider`  | `USSDProvider`         | **Required**. Bank USSD code enum (e.g., `USSDProvider.gtBank`) |
 | `metadata`  | `Map<String, dynamic>` | Optional. Extra data to attach                                  |
 
@@ -150,6 +150,14 @@ await DirectDebitBankService.initiate(
 | `state`         | `String`       | **Required**. State for billing address        |
 | `city`          | `String`       | **Required**. City for billing address         |
 | `street`        | `String`       | **Required**. Street for billing address       |
+
+
+
+> ⚠️ **Caution**
+> 
+> - Keep your Paystack **secret key** secure — never expose it publicly.
+> - Please refer to the paystack webiste for allowed payment services in countries
+> - Some payment methods are region-specific. Please refer to paystack's website
 
 
 ### Preview Images
