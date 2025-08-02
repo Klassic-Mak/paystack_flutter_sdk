@@ -51,8 +51,16 @@ class USSDPaymentService {
             context, "USSD Payment initiated successfully.");
         return ChargeResponse.fromJson(responseData);
       } else {
-        final errorMessage =
-            responseData['message'] ?? 'An unknown error occurred';
+        // Defensive extraction of error message
+        String errorMessage = 'An unknown error occurred';
+        if (responseData is Map && responseData.containsKey('message')) {
+          final msg = responseData['message'];
+          if (msg is String && msg.isNotEmpty) {
+            errorMessage = msg;
+          } else if (msg != null) {
+            errorMessage = msg.toString();
+          }
+        }
         CustomSnackbar.showError(context, "USSD Payment failed: $errorMessage");
         throw Exception("USSD Payment failed: $errorMessage");
       }

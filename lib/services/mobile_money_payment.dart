@@ -45,8 +45,16 @@ class MobileMoneyService {
             context, "Mobile Money charge initiated successfully.");
         return ChargeResponse.fromJson(responseData);
       } else {
-        final errorMessage =
-            responseData['message']?.toString() ?? 'Unknown error occurred';
+        // Defensive extraction of error message
+        String errorMessage = 'Unknown error occurred';
+        if (responseData is Map && responseData.containsKey('message')) {
+          final msg = responseData['message'];
+          if (msg is String && msg.isNotEmpty) {
+            errorMessage = msg;
+          } else if (msg != null) {
+            errorMessage = msg.toString();
+          }
+        }
         CustomSnackbar.showError(
             context, "Mobile Money charge failed: $errorMessage");
         throw Exception("Mobile Money charge failed: $errorMessage");

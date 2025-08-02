@@ -44,8 +44,16 @@ class QRPaymentService {
         CustomSnackbar.showSuccess(context, "Payment successful");
         return ChargeResponse.fromJson(responseData);
       } else {
-        final errorMessage =
-            responseData['message'] ?? "An unknown error occurred";
+        // Defensive extraction of error message
+        String errorMessage = "An unknown error occurred";
+        if (responseData is Map && responseData.containsKey('message')) {
+          final msg = responseData['message'];
+          if (msg is String && msg.isNotEmpty) {
+            errorMessage = msg;
+          } else if (msg != null) {
+            errorMessage = msg.toString();
+          }
+        }
         CustomSnackbar.showError(context, "QR Payment failed: $errorMessage");
         throw Exception("QR Payment failed: $errorMessage");
       }

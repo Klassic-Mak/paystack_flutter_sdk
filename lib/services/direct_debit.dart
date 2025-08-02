@@ -51,8 +51,16 @@ class DirectDebitBankService {
             context, "Direct debit initiated successfully.");
         return responseData;
       } else {
-        final errorMessage =
-            responseData['message'] ?? 'An unknown error occurred';
+        // Defensive extraction of error message
+        String errorMessage = 'An unknown error occurred';
+        if (responseData is Map && responseData.containsKey('message')) {
+          final msg = responseData['message'];
+          if (msg is String && msg.isNotEmpty) {
+            errorMessage = msg;
+          } else if (msg != null) {
+            errorMessage = msg.toString();
+          }
+        }
         CustomSnackbar.showError(context, "Direct debit failed: $errorMessage");
         throw Exception("Direct debit failed: $errorMessage");
       }
