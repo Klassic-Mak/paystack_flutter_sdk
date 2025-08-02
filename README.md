@@ -154,7 +154,10 @@ await DirectDebitBankService.initiate(
 
 ### Preview Images
 
-https://files.catbox.moe/an7m0u.png
+<p align="left">
+  <img src="https://files.catbox.moe/an7m0u.png" height="100" alt="Paystack Flutter Logo" />
+</p>
+
 
 ## Developers
 
