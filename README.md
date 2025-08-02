@@ -41,27 +41,26 @@ To run this project, you will need to add the following environment variables to
 
 
 
+## `paystack_flutter` Usage Guide
 
+This section demonstrates how to use the various services provided by the `paystack_flutter` package.
 
+---
 
+### 🏦 Initialize Bank Transfer
 
-## `paystack_flutter` usage
-
-#### Initialize 
-
-```http
-  await BankTransferService.initializeTransfer(
+```dart
+await BankTransferService.initializeTransfer(
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
   amount: 100000,
   currency: 'GHS',
 );
-
 ```
 
 | Parameter   | Type           | Description                               |
-| :---------- | :------------- | :---------------------------------------- |
+|-------------|----------------|-------------------------------------------|
 | `secretKey` | `String`       | **Required**. Your Paystack secret key    |
 | `email`     | `String`       | **Required**. Customer email address      |
 | `amount`    | `int`          | **Required**. Amount in kobo or pesewa    |
@@ -69,11 +68,12 @@ To run this project, you will need to add the following environment variables to
 | `metadata`  | `Map`          | Optional. Custom metadata                 |
 | `context`   | `BuildContext` | **Required**. For UI feedback (snackbars) |
 
+---
 
-#### Mobile Money Service 
+### 📱 Mobile Money Service
 
-```http
- await MobileMoneyService.charge(
+```dart
+await MobileMoneyService.charge(
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
@@ -82,20 +82,24 @@ To run this project, you will need to add the following environment variables to
   phone: '233XXXXXXXXX',
   provider: 'mtn',
 );
-
 ```
 
-| Parameter  | Type     | Description                          |
-| :--------- | :------- | :----------------------------------- |
-| `phone`    | `String` | **Required**. Mobile number          |
-| `provider` | `String` | **Required**. `mtn`, `vodafone`, etc |
+| Parameter   | Type     | Description                          |
+|-------------|----------|--------------------------------------|
+| `context`   | `BuildContext` | **Required**. Flutter context |
+| `secretKey` | `String` | **Required**. Your Paystack secret key |
+| `email`     | `String` | **Required**. Customer email address |
+| `amount`    | `int`    | **Required**. Amount in pesewa       |
+| `currency`  | `String` | **Required**. `'GHS'` only           |
+| `phone`     | `String` | **Required**. Mobile number          |
+| `provider`  | `String` | **Required**. `mtn`, `vodafone`, etc |
 
+---
 
+### 📲 USSD Payment
 
-
-#### 📲 USSD Payment Parameters
-
-```await USSDPaymentService.initialize(
+```dart
+await USSDPaymentService.initialize(
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
@@ -103,11 +107,10 @@ To run this project, you will need to add the following environment variables to
   currency: 'NGN',
   provider: USSDProvider.gtBank,
 );
-
-
 ```
+
 | Parameter   | Type                   | Description                                                     |
-| ----------- | ---------------------- | --------------------------------------------------------------- |
+|-------------|------------------------|-----------------------------------------------------------------|
 | `context`   | `BuildContext`         | **Required**. Flutter context for snackbar                      |
 | `secretKey` | `String`               | **Required**. Your Paystack secret key                          |
 | `email`     | `String`               | **Required**. Customer email                                    |
@@ -116,11 +119,28 @@ To run this project, you will need to add the following environment variables to
 | `provider`  | `USSDProvider`         | **Required**. Bank USSD code enum (e.g., `USSDProvider.gtBank`) |
 | `metadata`  | `Map<String, dynamic>` | Optional. Extra data to attach                                  |
 
+> 💡 Supported `USSDProvider` values: `gtBank`, `uba`, `sterling`, `zenith`
 
+---
 
-#### 🏦 Direct Debit Parameters
+### 🏛️ Direct Debit
+
+```dart
+await DirectDebitBankService.initiate(
+  context: context,
+  secretKey: yourSecretKey,
+  email: 'user@example.com',
+  callbackUrl: 'https://yourdomain.com/callback',
+  accountNumber: '0123456789',
+  bankCode: '058',
+  state: 'Lagos',
+  city: 'Ikeja',
+  street: '12 Main Street',
+);
+```
+
 | Parameter       | Type           | Description                                    |
-| --------------- | -------------- | ---------------------------------------------- |
+|-----------------|----------------|------------------------------------------------|
 | `context`       | `BuildContext` | **Required**. Flutter context                  |
 | `secretKey`     | `String`       | **Required**. Paystack secret key              |
 | `email`         | `String`       | **Required**. Customer email                   |
@@ -130,8 +150,6 @@ To run this project, you will need to add the following environment variables to
 | `state`         | `String`       | **Required**. State for billing address        |
 | `city`          | `String`       | **Required**. City for billing address         |
 | `street`        | `String`       | **Required**. Street for billing address       |
-
-
 
 ## Developers
 
