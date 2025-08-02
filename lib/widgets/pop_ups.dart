@@ -56,9 +56,8 @@ class CustomSnackbar {
                     overflow: TextOverflow.fade,
                     style: TextStyle(
                       color: textColor,
-                      fontFamily: 'Raleway',
                       fontWeight: FontWeight.w600,
-                      fontSize: 15,
+                      fontSize: 14,
                     ),
                   ),
                 ),
