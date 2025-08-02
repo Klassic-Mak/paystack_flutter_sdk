@@ -69,7 +69,11 @@ class _PaymentProcessingScreenState extends State<PaymentProcessingScreen> {
                     "packages/paystack_flutter/assets/loading_blue.json"),
               ),
               const SizedBox(height: 16),
-              const Text("Processing Paymento"),
+              const Text("Processing Payment...",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  )),
               const Spacer(flex: 2),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
