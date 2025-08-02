@@ -51,6 +51,12 @@ This section demonstrates how to use the various services provided by the `payst
 
 ```dart
 await BankTransferService.initializeTransfer(
+       onFailure: (p0) {
+        print(p0);
+      },
+      onSuccess: (p0) {
+        
+      },
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
@@ -74,6 +80,12 @@ await BankTransferService.initializeTransfer(
 
 ```dart
 await MobileMoneyService.charge(
+       onFailure: (p0) {
+        print(p0);
+      },
+      onSuccess: (p0) {
+        
+      },
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
@@ -100,6 +112,12 @@ await MobileMoneyService.charge(
 
 ```dart
 await USSDPaymentService.initialize(
+       onFailure: (p0) {
+        print(p0);
+      },
+      onSuccess: (p0) {
+        
+      },
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
@@ -127,6 +145,12 @@ await USSDPaymentService.initialize(
 
 ```dart
 await DirectDebitBankService.initiate(
+       onFailure: (p0) {
+        print(p0);
+      },
+      onSuccess: (p0) {
+        
+      },
   context: context,
   secretKey: yourSecretKey,
   email: 'user@example.com',
