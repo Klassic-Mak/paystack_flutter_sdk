@@ -38,7 +38,7 @@ class ChargeResponse {
     final data = json['data'];
     return ChargeResponse(
       status: json['status'],
-      message: json['message'],
+      message: json['message']?.toString() ?? 'No message returned',
       reference: data['reference'],
       authorizationUrl: data['authorization_url'],
     );
