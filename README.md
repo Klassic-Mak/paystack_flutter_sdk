@@ -23,6 +23,21 @@
 📦 Package-based asset loading (e.g., Paystack logo)
 
 
+
+## Compatibility
+
+| Android     | ✅              |                                
+|-------------|----------------|
+|iOS          | ✅ 
+|-------------|----------------|
+|Web          | `coming soon`
+|-------------|----------------|
+|Windows      | ✅ 
+|-------------|----------------|
+|Linux |      | ❌ 
+|-------------|----------------|
+
+
 ## Installation
 
 Installing  `paystack_flutter` 
@@ -95,6 +110,8 @@ await MobileMoneyService.charge(
   provider: 'mtn',
 );
 ```
+
+
 
 | Parameter   | Type     | Description                          |
 |-------------|----------|--------------------------------------|

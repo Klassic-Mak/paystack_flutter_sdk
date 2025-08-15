@@ -2,7 +2,10 @@ library paystack_flutter;
 
 // ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:paystack_flutter/model/payment_data.dart';
 import 'package:paystack_flutter/services/bank_transfer_payment.dart';
 import 'package:paystack_flutter/services/direct_debit.dart';
@@ -14,7 +17,7 @@ import '../model/paystack_request_response.dart';
 
 class PaystackFlutter {
   // === USSD Payments ===
-  static Future<void> ussd({
+  static Future<PaymentData?> ussd({
     required BuildContext context,
     required String secretKey,
     required String email,
@@ -25,7 +28,7 @@ class PaystackFlutter {
     Function(PaymentData)? onSuccess,
     Function(String)? onFailure,
   }) async {
-    await Navigator.push(
+    final result = await Navigator.push<PaymentData>(
       context,
       MaterialPageRoute(
         builder: (_) => PaymentProcessingScreen(
@@ -39,9 +42,10 @@ class PaystackFlutter {
               currency: currency,
               metadata: metadata,
             );
+
             return PaymentData(
               reference: res.reference,
-              status: res.status ? 'success' : 'failed',
+              status: res.status ? 'true' : 'false',
               message: res.message,
             );
           },
@@ -50,6 +54,8 @@ class PaystackFlutter {
         ),
       ),
     );
+
+    return result;
   }
 
   // === Mobile Money ===
@@ -82,7 +88,7 @@ class PaystackFlutter {
             );
             return PaymentData(
               reference: res.reference,
-              status: res.status ? 'success' : 'failed',
+              status: res.status ? 'true' : 'false',
               message: res.message,
             );
           },
@@ -120,7 +126,7 @@ class PaystackFlutter {
             );
             return PaymentData(
               reference: res.reference,
-              status: res.status ? 'success' : 'failed',
+              status: res.status ? 'true' : 'false',
               message: res.message,
             );
           },
@@ -159,7 +165,7 @@ class PaystackFlutter {
             );
             return PaymentData(
               reference: res.reference,
-              status: res.status ? 'success' : 'failed',
+              status: res.status ? 'true' : 'false',
               message: res.message,
             );
           },
@@ -211,6 +217,26 @@ class PaystackFlutter {
         ),
       ),
     );
+  }
+
+  static Future<PaymentData> verifyPayment({
+    required String secretKey,
+    required String reference,
+  }) async {
+    final response = await http.get(
+      Uri.parse('https://api.paystack.co/transaction/verify/$reference'),
+      headers: {
+        'Authorization': 'Bearer $secretKey',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      return PaymentData.fromJson(json['data']);
+    } else {
+      throw Exception('Transaction verification failed: ${response.body}');
+    }
   }
 }
 

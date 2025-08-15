@@ -4,15 +4,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:paystack_flutter/model/paystack_request_response.dart';
-import 'package:paystack_flutter/widgets/pop_ups.dart'; // 🔔 Make sure this contains CustomSnackbar
+import 'package:paystack_flutter/widgets/pop_ups.dart';
 
 class BankTransferService {
   static Future<ChargeResponse> initializeTransfer({
     required BuildContext context,
     required String secretKey,
     required String email,
-    required int amount, // in kobo or pesewa
-    required String currency, // or 'GHS' if supported
+    required int amount,
+    required String currency,
     String? reference,
     Map<String, dynamic>? metadata,
   }) async {

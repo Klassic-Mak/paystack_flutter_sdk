@@ -4,14 +4,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:paystack_flutter/model/paystack_request_response.dart';
-import 'package:paystack_flutter/widgets/pop_ups.dart'; // 🔔 Ensure this has CustomSnackbar
+import 'package:paystack_flutter/widgets/pop_ups.dart'; // Ensure CustomSnackbar is defined here
 
-// For Nigerians
+// Enum for common Nigerian USSD providers
 enum USSDProvider {
-  gtBank, // 737
-  uba, // 919
-  sterling, // 822
-  zenith, // 966
+  gtBank, // *737#
+  uba, // *919#
+  sterling, // *822#
+  zenith, // *966#
 }
 
 class USSDPaymentService {
@@ -42,25 +42,30 @@ class USSDPaymentService {
               'metadata': metadata ?? {},
             }),
           )
-          .timeout(const Duration(seconds: 15)); // ⏱ Timeout
+          .timeout(const Duration(seconds: 15));
 
       final responseData = jsonDecode(response.body);
+      print(responseData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        CustomSnackbar.showSuccess(
-            context, "USSD Payment initiated successfully.");
-        return ChargeResponse.fromJson(responseData);
-      } else {
-        // Defensive extraction of error message
-        String errorMessage = 'An unknown error occurred';
-        if (responseData is Map && responseData.containsKey('message')) {
-          final msg = responseData['message'];
-          if (msg is String && msg.isNotEmpty) {
-            errorMessage = msg;
-          } else if (msg != null) {
-            errorMessage = msg.toString();
-          }
+        final bool paystackStatus = responseData['status'] == true;
+
+        if (paystackStatus) {
+          CustomSnackbar.showSuccess(
+            context,
+            responseData['message']?.toString() ?? "USSD charge initiated.",
+          );
+          return ChargeResponse.fromJson(responseData);
+        } else {
+          final errorMessage =
+              responseData['message']?.toString() ?? "Something went wrong";
+          CustomSnackbar.showError(
+              context, "USSD Payment failed: $errorMessage");
+          throw Exception("USSD Payment failed: $errorMessage");
         }
+      } else {
+        final errorMessage = responseData['message']?.toString() ??
+            "Unexpected response from Paystack";
         CustomSnackbar.showError(context, "USSD Payment failed: $errorMessage");
         throw Exception("USSD Payment failed: $errorMessage");
       }

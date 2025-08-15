@@ -36,10 +36,10 @@ class MobileMoneyService {
               'metadata': metadata ?? {},
             }),
           )
-          .timeout(const Duration(seconds: 15)); // ⏱ Timeout
+          .timeout(const Duration(seconds: 15));
 
       final responseData = jsonDecode(response.body);
-      print(responseData);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         CustomSnackbar.showSuccess(
             context, "Mobile Money charge initiated successfully.");

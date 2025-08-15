@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:paystack_flutter/widgets/pop_ups.dart'; // 🔔 Ensure this file has CustomSnackbar
+import 'package:paystack_flutter/widgets/pop_ups.dart';
 
 class DirectDebitBankService {
   static Future<Map<String, dynamic>> initiate({
