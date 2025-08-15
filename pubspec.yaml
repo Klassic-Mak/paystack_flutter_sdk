@@ -1,7 +1,7 @@
 name: paystack_flutter
 description: Flutter Plugin that enable users make Paystack payment with either Mobile Money, USSD or Card without web view.
 version: 1.0.0
-publish_to: 
+
 
 environment:
   sdk: ">=3.2.0 <4.0.0"
