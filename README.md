@@ -26,16 +26,12 @@
 
 ## Compatibility
 
-| Android     | ✅              |                                
-|-------------|----------------|
+| Android     | ✅                                        
 |iOS          | ✅ 
-|-------------|----------------|
-|Web          | `coming soon`
-|-------------|----------------|
+|Web          | ✅
 |Windows      | ✅ 
-|-------------|----------------|
 |Linux |      | ❌ 
-|-------------|----------------|
+
 
 
 ## Installation
@@ -73,7 +69,7 @@ await BankTransferService.initializeTransfer(
         
       },
   context: context,
-  secretKey: yourSecretKey,
+  secretKey: yourPublicKey,
   email: 'user@example.com',
   amount: 100000,
   currency: 'GHS',
@@ -102,7 +98,7 @@ await MobileMoneyService.charge(
         
       },
   context: context,
-  secretKey: yourSecretKey,
+  secretKey: yourPublicKey,
   email: 'user@example.com',
   amount: 200000,
   currency: 'GHS',
@@ -136,7 +132,7 @@ await USSDPaymentService.initialize(
         
       },
   context: context,
-  secretKey: yourSecretKey,
+  secretKey: yourPublicKey,
   email: 'user@example.com',
   amount: 50000,
   currency: 'NGN',
@@ -169,7 +165,7 @@ await DirectDebitBankService.initiate(
         
       },
   context: context,
-  secretKey: yourSecretKey,
+  secretKey: yourPublicKey,
   email: 'user@example.com',
   callbackUrl: 'https://yourdomain.com/callback',
   accountNumber: '0123456789',
